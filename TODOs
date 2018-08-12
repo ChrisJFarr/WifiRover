@@ -1,0 +1,13 @@
+Application:
+Apache Server
+Flask app, web interface
+
+Device connections:
+Picamera
+Arduino
+
+Programs:
+Arduino, drive and camera controls
+Flask frontend, html, forms, API calls
+Flask backend, arduino interface
+
