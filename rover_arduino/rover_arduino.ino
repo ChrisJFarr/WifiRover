@@ -12,13 +12,14 @@ const int LOOP_DELAY = 50;
 
 // Declare variables
 int incoming[5];
+bool messageWaiting;
 Robot robot;
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600); //start serial port
-  robot.begin();
   pinMode(LED_BUILTIN, OUTPUT); // initialize digital pin LED_BUILTIN as an output.
+  robot.begin();
 }
 
 void loop() {
@@ -32,11 +33,15 @@ void loop() {
   {
     digitalWrite(LED_BUILTIN, HIGH);
   }
-  robot.setLeftWheelDirection(incoming[LEFT_INDEX]);
-  robot.setRightWheelDirection(incoming[RIGHT_INDEX]);
-  robot.setWheelSpeed(incoming[SPEED_INDEX]);
-  robot.adjustPan(incoming[PAN_INDEX]);
-  robot.adjustTilt(incoming[TILT_INDEX]);
+  if(messageWaiting)
+  {
+    robot.setLeftWheelDirection(incoming[LEFT_INDEX]);
+    robot.setRightWheelDirection(incoming[RIGHT_INDEX]);
+    robot.setWheelSpeed(incoming[SPEED_INDEX]);
+    robot.adjustPan(incoming[PAN_INDEX]);
+    robot.adjustTilt(incoming[TILT_INDEX]);
+    messageWaiting = false;
+  }
   delay(LOOP_DELAY);
 }
 
@@ -50,5 +55,6 @@ void fillIncoming()
     {
       incoming[i] = Serial.read();
     }
+    messageWaiting = true;
   }
 }

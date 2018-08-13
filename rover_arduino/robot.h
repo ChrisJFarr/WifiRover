@@ -18,9 +18,13 @@ class Robot {
     const int X_SERVO_PIN = 9;
     const int Y_SERVO_PIN = 10;
     const int SERVO_DELAY = 5; //delay to allow the servo to reach position;
-    const int SERVO_SPEED = 5; // Steps per servo adjustment call
+    const int SERVO_SPEED = 3; // Steps per servo adjustment call
     const int X_START_POS = 90;
-    const int Y_START_POS = 175;
+    const int Y_START_POS = 165;
+    const int X_MAX = 170;
+    const int X_MIN = 10;
+    const int Y_MAX = 180;
+    const int Y_MIN = 0;
 
     /* Declare Variables */
 //    int message[5];  // [left, right, speed, pan delta, tilt delta]

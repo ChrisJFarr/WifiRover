@@ -34,8 +34,13 @@ arduino.write(struct.pack('>BBBBB', 1, 1, speed, 1, 1))
 # pan_left: message[3] = 0
 arduino.write(struct.pack('>BBBBB', 1, 1, speed, 0, 1))
 # no_pan: message[3] = 1
+arduino.write(struct.pack('>BBBBB', 1, 1, speed, 1, 1))
 # pan_right: message[3] = 2
-# tilt_up: message[4] = 0
+arduino.write(struct.pack('>BBBBB', 1, 1, speed, 2, 1))
+# tilt_up: message[4] = 2
+arduino.write(struct.pack('>BBBBB', 1, 1, speed, 1, 2))
 # no_tilt: message[3] = 1
-# tilt_down: message[4] = 2
+arduino.write(struct.pack('>BBBBB', 1, 1, speed, 1, 1))
+# tilt_down: message[4] = 0
+arduino.write(struct.pack('>BBBBB', 1, 1, speed, 1, 0))
 

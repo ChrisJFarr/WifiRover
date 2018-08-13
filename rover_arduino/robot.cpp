@@ -6,11 +6,6 @@
 
 Robot::Robot()
 {
-    // Servo setup
-    xServo.attach(X_SERVO_PIN);
-    yServo.attach(Y_SERVO_PIN);
-    xPos = X_START_POS; //declare initial position of the servo
-    yPos = Y_START_POS; //declare initial position of the servo
     // Motor setup
     AFMS = Adafruit_MotorShield();
     frontLeftMotor = AFMS.getMotor(FRONT_LEFT_MOTOR_PIN);
@@ -25,6 +20,13 @@ void Robot::begin()
 {
     AFMS.begin();
     setWheelSpeed(0);  // Set starting speed to 0
+    // Servo setup
+    xServo.attach(X_SERVO_PIN);
+    yServo.attach(Y_SERVO_PIN);
+    xPos = X_START_POS; //declare initial position of the servo
+    yPos = Y_START_POS; //declare initial position of the servo
+    xServo.write(xPos);
+    yServo.write(yPos);
 }
 
 
@@ -84,18 +86,19 @@ void Robot::setWheelSpeed(int speed){
     backRightMotor->setSpeed(speed);
 }
 
-// pan: if 0, -SERVO_SPEED, if 1, no change, if 2 SERVO_SPEED
+// pan: if 0, SERVO_SPEED, if 1, no change, if 2 -SERVO_SPEED
 void Robot::adjustPan(int pan){
     int newXPos;
     switch(pan)
     {
         case 0:
-            newXPos = xPos - SERVO_SPEED;
+            newXPos = max(xPos + SERVO_SPEED, X_MIN);
             break;
         case 1:
+            newXPos = xPos;
             break;
         case 2:
-            newXPos = xPos + SERVO_SPEED;
+            newXPos = min(xPos - SERVO_SPEED, X_MAX);
             break;
         default:
             break;
@@ -115,18 +118,19 @@ void Robot::adjustPan(int pan){
     return;
 }
 
-// tilt: if 0, -SERVO_SPEED, if 1, no change, if 2 SERVO_SPEED
+// tilt: if 0, SERVO_SPEED, if 1, no change, if 2 -SERVO_SPEED
 void Robot::adjustTilt(int tilt){
     int newYPos;
     switch(tilt)
     {
         case 0:
-            newYPos = yPos - SERVO_SPEED;
+            newYPos = max(yPos + SERVO_SPEED, Y_MIN);
             break;
         case 1:
+            newYPos = yPos;
             break;
         case 2:
-            newYPos = yPos + SERVO_SPEED;
+            newYPos = min(yPos - SERVO_SPEED, Y_MAX);
             break;
         default:
             break;
