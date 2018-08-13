@@ -18,7 +18,7 @@ API calls: video generator call, calls for all drive and camera operations
 Flask backend, arduino interface
 Class for robot object, connects to arduino, operations correspond to application
 
-robot class: (python)
+robot class: (client robot class in python)
 send message [left, right, speed, pan, tilt]
 forward: message[0] = 2, message[1] = 2
 backward: message[0] = 0, message[1] = 0

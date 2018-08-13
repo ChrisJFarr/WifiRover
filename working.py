@@ -13,7 +13,8 @@ arduino = serial.Serial('com3', 9600, timeout=1)
 # [left, right, speed, pan, tilt]
 # drive_straight_slowly = [2, 2, 50, 1, 1]
 
-
+# TODO Build out a test scripts
+# TODO Build robot client application (see TODOs)
 speed = 80
 # Manual testing
 # [left, right, speed, pan, tilt]
