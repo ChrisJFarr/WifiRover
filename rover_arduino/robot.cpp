@@ -12,7 +12,7 @@ Robot::Robot()
     xPos = X_START_POS; //declare initial position of the servo
     yPos = Y_START_POS; //declare initial position of the servo
     // Motor setup
-    Adafruit_MotorShield AFMS = Adafruit_MotorShield();
+    AFMS = Adafruit_MotorShield();
     frontLeftMotor = AFMS.getMotor(FRONT_LEFT_MOTOR_PIN);
     backLeftMotor = AFMS.getMotor(BACK_LEFT_MOTOR_PIN);
     frontRightMotor = AFMS.getMotor(FRONT_RIGHT_MOTOR_PIN);
@@ -20,7 +20,15 @@ Robot::Robot()
 }
 
 
-    // set left wheel direction: case message[0]: 0: backward 1: release 2: forward
+// Begin AFMS
+void Robot::begin()
+{
+    AFMS.begin();
+    setWheelSpeed(0);  // Set starting speed to 0
+}
+
+
+// set left wheel direction: case message[0]: 0: backward 1: release 2: forward
 void Robot::setLeftWheelDirection(int left){
     switch(left)
     {
@@ -43,7 +51,8 @@ void Robot::setLeftWheelDirection(int left){
             break;
     }
 }
-    // set right wheel direction: case message[1]: 0: backward 1: release 2: forward
+
+// set right wheel direction: case message[1]: 0: backward 1: release 2: forward
 void Robot::setRightWheelDirection(int right){
     switch(right)
     {
@@ -66,18 +75,72 @@ void Robot::setRightWheelDirection(int right){
             break;
     }
 }
-    // set wheel speed: message[2]
+
+// set wheel speed: message[2]
 void Robot::setWheelSpeed(int speed){
     frontLeftMotor->setSpeed(speed);
     backLeftMotor->setSpeed(speed);
     frontRightMotor->setSpeed(speed);
     backRightMotor->setSpeed(speed);
 }
-    // set servo pan: x += message[3]
-void Robot::addToPan(int degrees){
 
+// pan: if 0, -SERVO_SPEED, if 1, no change, if 2 SERVO_SPEED
+void Robot::adjustPan(int pan){
+    int newXPos;
+    switch(pan)
+    {
+        case 0:
+            newXPos = xPos - SERVO_SPEED;
+            break;
+        case 1:
+            break;
+        case 2:
+            newXPos = xPos + SERVO_SPEED;
+            break;
+        default:
+            break;
+    }
+
+    while(newXPos != xPos)
+    {
+        xServo.write(xPos); //write the position into the servo
+        delay(SERVO_DELAY); //give time to the servo to reach the position
+        if(xPos < newXPos)
+        {
+            xPos++;
+        } else {
+            xPos--;
+        }
+    }
+    return;
 }
-    // set servo tilt: y += message[3]
-void Robot::addToTilt(int degrees){
 
+// tilt: if 0, -SERVO_SPEED, if 1, no change, if 2 SERVO_SPEED
+void Robot::adjustTilt(int tilt){
+    int newYPos;
+    switch(tilt)
+    {
+        case 0:
+            newYPos = yPos - SERVO_SPEED;
+            break;
+        case 1:
+            break;
+        case 2:
+            newYPos = yPos + SERVO_SPEED;
+            break;
+        default:
+            break;
+    }
+    while(newYPos != yPos)
+    {
+        yServo.write(yPos); //write the position into the servo
+        delay(SERVO_DELAY); //give time to the servo to reach the position
+        if(yPos < newYPos)
+        {
+            yPos++;
+        } else {
+            yPos--;
+        }
+    }
+    return;
 }

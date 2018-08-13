@@ -19,7 +19,7 @@ Flask backend, arduino interface
 Class for robot object, connects to arduino, operations correspond to application
 
 robot class: (python)
-send message [left, right, speed, pan delta, tilt delta]
+send message [left, right, speed, pan, tilt]
 forward: message[0] = 2, message[1] = 2
 backward: message[0] = 0, message[1] = 0
 spin_left: message[0] = 0; message[1] = 2
@@ -27,10 +27,12 @@ spin_right: message[0] = 2; message[1] = 0
 forward_right: message[0] = 2; message[1] = 1
 forward_left: message[0] = 1; message[1] = 2
 stop: message[0] = 1; message[1] = 1
-pan_left: param distance, message[3] = distance
-pan_right: param distance, message[3] = -distance
-tilt_up: param distance, message[4] = distance
-tilt_down: param distance, message[4] = -distance
+pan_left: message[3] = 0
+no_pan: message[3] = 1
+pan_right: message[3] = 2
+tilt_up: message[4] = 0
+no_tilt: message[3] = 1
+tilt_down: message[4] = 2
 
 
 arduino program
@@ -49,6 +51,6 @@ setup constructor
 set left wheel direction: case message[0]: 0: backward 1: release 2: forward
 set right wheel direction: case message[1]: 0: backward 1: release 2: forward
 set wheel speed: message[2]
-set servo pan: x -= message[3]
-set servo tilt: y -= message[3]
+set servo pan: message[3]
+set servo tilt: message[4]
 

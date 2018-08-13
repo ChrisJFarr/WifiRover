@@ -18,6 +18,7 @@ class Robot {
     const int X_SERVO_PIN = 9;
     const int Y_SERVO_PIN = 10;
     const int SERVO_DELAY = 5; //delay to allow the servo to reach position;
+    const int SERVO_SPEED = 5; // Steps per servo adjustment call
     const int X_START_POS = 90;
     const int Y_START_POS = 175;
 
@@ -36,6 +37,8 @@ class Robot {
     // servo variables
 public:
     Robot();
+    // begin program
+    void begin();
     // set left wheel direction: case message[0]: 0: backward 1: release 2: forward
     void setLeftWheelDirection(int left);
     // set right wheel direction: case message[1]: 0: backward 1: release 2: forward
@@ -43,8 +46,8 @@ public:
     // set wheel speed: message[2]
     void setWheelSpeed(int speed);
     // set servo pan: x += message[3]
-    void addToPan(int degrees);
+    void adjustPan(int pan);
     // set servo tilt: y += message[3]
-    void addToTilt(int degrees);
+    void adjustTilt(int tilt);
 
 };
