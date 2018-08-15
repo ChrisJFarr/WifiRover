@@ -13,13 +13,13 @@ const int LOOP_DELAY = 50;
 // Declare variables
 int incoming[5];
 bool messageWaiting;
-Robot robot;
+Rover rover;
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600); //start serial port
   pinMode(LED_BUILTIN, OUTPUT); // initialize digital pin LED_BUILTIN as an output.
-  robot.begin();
+  rover.begin();
 }
 
 void loop() {
@@ -35,11 +35,11 @@ void loop() {
   }
   if(messageWaiting)
   {
-    robot.setLeftWheelDirection(incoming[LEFT_INDEX]);
-    robot.setRightWheelDirection(incoming[RIGHT_INDEX]);
-    robot.setWheelSpeed(incoming[SPEED_INDEX]);
-    robot.adjustPan(incoming[PAN_INDEX]);
-    robot.adjustTilt(incoming[TILT_INDEX]);
+    rover.setLeftWheelDirection(incoming[LEFT_INDEX]);
+    rover.setRightWheelDirection(incoming[RIGHT_INDEX]);
+    rover.setWheelSpeed(incoming[SPEED_INDEX]);
+    rover.adjustPan(incoming[PAN_INDEX]);
+    rover.adjustTilt(incoming[TILT_INDEX]);
     messageWaiting = false;
   }
   delay(LOOP_DELAY);
