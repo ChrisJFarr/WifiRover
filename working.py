@@ -44,4 +44,3 @@ arduino.write(struct.pack('>BBBBB', 1, 1, speed, 1, 2))
 arduino.write(struct.pack('>BBBBB', 1, 1, speed, 1, 1))
 # tilt_down: message[4] = 0
 arduino.write(struct.pack('>BBBBB', 1, 1, speed, 1, 0))
-

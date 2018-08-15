@@ -3,7 +3,7 @@
 #include <Wire.h>
 #include "utility/Adafruit_MS_PWMServoDriver.h"
 
-class Robot {
+class Rover {
 
     /* Declare constants */
 
@@ -19,8 +19,8 @@ class Robot {
     const int Y_SERVO_PIN = 10;
     const int SERVO_DELAY = 5; //delay to allow the servo to reach position;
     const int SERVO_SPEED = 3; // Steps per servo adjustment call
-    const int X_START_POS = 90;
-    const int Y_START_POS = 165;
+    const int X_START_POS = 80;
+    const int Y_START_POS = 130;
     const int X_MAX = 170;
     const int X_MIN = 10;
     const int Y_MAX = 180;
@@ -40,7 +40,7 @@ class Robot {
 
     // servo variables
 public:
-    Robot();
+    Rover();
     // begin program
     void begin();
     // set left wheel direction: case message[0]: 0: backward 1: release 2: forward

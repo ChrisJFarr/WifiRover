@@ -2,9 +2,9 @@
 #include <Adafruit_MotorShield.h>
 #include <Wire.h>
 #include "utility/Adafruit_MS_PWMServoDriver.h"
-#include "robot.h"
+#include "rover.h"
 
-Robot::Robot()
+Rover::Rover()
 {
     // Motor setup
     AFMS = Adafruit_MotorShield();
@@ -16,7 +16,7 @@ Robot::Robot()
 
 
 // Begin AFMS
-void Robot::begin()
+void Rover::begin()
 {
     AFMS.begin();
     setWheelSpeed(0);  // Set starting speed to 0
@@ -31,7 +31,7 @@ void Robot::begin()
 
 
 // set left wheel direction: case message[0]: 0: backward 1: release 2: forward
-void Robot::setLeftWheelDirection(int left){
+void Rover::setLeftWheelDirection(int left){
     switch(left)
     {
         case 0:
@@ -55,7 +55,7 @@ void Robot::setLeftWheelDirection(int left){
 }
 
 // set right wheel direction: case message[1]: 0: backward 1: release 2: forward
-void Robot::setRightWheelDirection(int right){
+void Rover::setRightWheelDirection(int right){
     switch(right)
     {
         case 0:
@@ -79,7 +79,7 @@ void Robot::setRightWheelDirection(int right){
 }
 
 // set wheel speed: message[2]
-void Robot::setWheelSpeed(int speed){
+void Rover::setWheelSpeed(int speed){
     frontLeftMotor->setSpeed(speed);
     backLeftMotor->setSpeed(speed);
     frontRightMotor->setSpeed(speed);
@@ -87,7 +87,7 @@ void Robot::setWheelSpeed(int speed){
 }
 
 // pan: if 0, SERVO_SPEED, if 1, no change, if 2 -SERVO_SPEED
-void Robot::adjustPan(int pan){
+void Rover::adjustPan(int pan){
     int newXPos;
     switch(pan)
     {
@@ -119,7 +119,7 @@ void Robot::adjustPan(int pan){
 }
 
 // tilt: if 0, SERVO_SPEED, if 1, no change, if 2 -SERVO_SPEED
-void Robot::adjustTilt(int tilt){
+void Rover::adjustTilt(int tilt){
     int newYPos;
     switch(tilt)
     {

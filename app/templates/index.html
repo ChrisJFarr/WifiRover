@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rover</title>
+</head>
+<body>
+
+<form>
+    <table>
+        <tr>
+            <td>
+                <a href=# id=up_left class=drive_buttons>
+                    <button class='btn btn-default'>
+                        <img src="{{url_for('static', filename='up_left_arrow.png')}}"
+                             width="100" height="100"/>
+                    </button>
+                </a>
+                <a href=# id=up class=drive_buttons>
+                    <button class='btn btn-default'>
+                        <img src="{{url_for('static', filename='up_arrow.png')}}"
+                             width="100" height="100"/>
+                    </button>
+                </a>
+                <a href=# id=up_right class=drive_buttons>
+                    <button class='btn btn-default'>
+                        <img src="{{url_for('static', filename='up_right_arrow.png')}}"
+                             width="100" height="100"/>
+                    </button>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href=# id=left class=drive_buttons>
+                    <button class='btn btn-default'>
+                        <img src="{{url_for('static', filename='left_arrow.png')}}"
+                             width="160" height="100"/>
+                    </button>
+                </a>
+                <a href=# id=right class=drive_buttons>
+                    <button class='btn btn-default'>
+                        <img src="{{url_for('static', filename='right_arrow.png')}}"
+                             width="160" height="100"/>
+                    </button>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href=# id=down class=drive_buttons>
+                    <button class='btn btn-default'>
+                        <img src="{{url_for('static', filename='down_arrow.png')}}"
+                             width="340" height="100"/>
+                    </button>
+                </a>
+            </td>
+        </tr>
+    </table>
+</form>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type=text/javascript>
+    $(function () {
+        $(document.getElementsByClassName("drive_buttons")).bind('mouseup', function () {
+            $.post("/drive", {
+                data: "stop"
+            });
+            return false;
+        });
+    });
+    $(function () {
+        $('a#up').bind('mousedown', function () {
+            $.post("/drive", {
+                data: "up"
+            });
+            return false;
+        });
+    });
+    $(function () {
+        $('a#up_left').bind('mousedown', function () {
+            $.post("/drive", {
+                data: "up_left"
+            });
+            return false;
+        });
+    });
+    $(function () {
+        $('a#up_right').bind('mousedown', function () {
+            $.post("/drive", {
+                data: "up_right"
+            });
+            return false;
+        });
+    });
+    $(function () {
+        $('a#left').bind('mousedown', function () {
+            $.post("/drive", {
+                data: "left"
+            });
+            return false;
+        });
+    });
+    $(function () {
+        $('a#right').bind('mousedown', function () {
+            $.post("/drive", {
+                data: "right"
+            });
+            return false;
+        });
+    });
+    $(function () {
+        $('a#down').bind('mousedown', function () {
+            $.post("/drive", {
+                data: "down"
+            });
+            return false;
+        });
+    });
+</script>
+</body>
+</html>
