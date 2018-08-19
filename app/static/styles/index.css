@@ -1,0 +1,136 @@
+/* Style the video: 100% width and height to cover the entire window */
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+}
+
+/* Add some content at the bottom of the video/page */
+.content {
+    position: fixed;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 100%;
+	height: 25%;
+    padding: 20px;
+}
+
+/* Style the button used to pause/play the video */
+
+
+#single_arrows {
+}
+
+#double_arrows {
+	white-space: nowrap;
+}
+
+#triple_arrows {
+	white-space: nowrap;
+}
+
+#operations {
+    margin: auto;
+}
+
+img {
+	width: 50px;
+	height: 50px;
+}
+
+
+#drive_operations {
+	float: left;
+	margin-left: 40%;
+}
+
+#forward_left {
+	transform: rotate(-45deg);
+	padding-right: 0px;
+	padding-left: 0px;
+	padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+#forward {
+	transform: rotate(0deg);
+	padding-right: 0px;
+	padding-left: 0px;
+	padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+#forward_right {
+	transform: rotate(45deg);
+	padding-right: 0px;
+	padding-left: 0px;
+	padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+#spin_left {
+	transform: rotate(-90deg);
+	padding-right: 30px;
+	padding-left: 0px;
+	padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+#spin_right {
+	transform: rotate(90deg);
+	padding-right: 0px;
+	padding-left: 30px;
+	padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+#backward {
+	transform: rotate(180deg);
+	padding-right: 57px;
+	padding-left: 25;
+	padding-top: 0px;
+    padding-bottom: 30px;
+}
+
+
+#camera_operations {
+	float: right;
+	margin-right: 30%
+	
+}
+
+#tilt_up {
+	transform: rotate(0deg);
+	padding-right: 25px;
+	padding-left: 57px;
+	padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+#tilt_down {
+	transform: rotate(180deg);
+	padding-right: 57px;
+	padding-left: 25;
+	padding-top: 0px;
+    padding-bottom: 30px;
+}
+
+#pan_left {
+	transform: rotate(-90deg);
+	padding-right: 30px;
+	padding-left: 0px;
+	padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+#pan_right {
+	transform: rotate(90deg);
+	padding-right: 0px;
+	padding-left: 30px;
+	padding-top: 0px;
+    padding-bottom: 0px;
+}
+

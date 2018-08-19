@@ -3,63 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <title>Rover</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}"/>
 </head>
 <body>
 
-<form>
-    <table>
-        <tr>
-            <td>
-                <a href=# id=up_left class=drive_buttons>
-                    <button class='btn btn-default'>
-                        <img src="{{url_for('static', filename='up_left_arrow.png')}}"
-                             width="100" height="100"/>
-                    </button>
-                </a>
-                <a href=# id=up class=drive_buttons>
-                    <button class='btn btn-default'>
-                        <img src="{{url_for('static', filename='up_arrow.png')}}"
-                             width="100" height="100"/>
-                    </button>
-                </a>
-                <a href=# id=up_right class=drive_buttons>
-                    <button class='btn btn-default'>
-                        <img src="{{url_for('static', filename='up_right_arrow.png')}}"
-                             width="100" height="100"/>
-                    </button>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a href=# id=left class=drive_buttons>
-                    <button class='btn btn-default'>
-                        <img src="{{url_for('static', filename='left_arrow.png')}}"
-                             width="160" height="100"/>
-                    </button>
-                </a>
-                <a href=# id=right class=drive_buttons>
-                    <button class='btn btn-default'>
-                        <img src="{{url_for('static', filename='right_arrow.png')}}"
-                             width="160" height="100"/>
-                    </button>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a href=# id=down class=drive_buttons>
-                    <button class='btn btn-default'>
-                        <img src="{{url_for('static', filename='down_arrow.png')}}"
-                             width="340" height="100"/>
-                    </button>
-                </a>
-            </td>
-        </tr>
-    </table>
-</form>
+	<div class="background">
+		<img src="{{url_for('static', filename='background.png')}}" id="myVideo"/>
+	</div>
 
+	<div id="operations" class="content">
+	<form>
+		<div id="drive_operations">
+			<div id="triple_arrows">
+				<a id=up_left class=drive_buttons>
+					<button>
+						<img src="{{url_for('static', filename='up_arrow.png')}}"
+							 width="100" height="100"/>
+					</button>
+				</a>
+				<a id=up class=drive_buttons>
+					<button>
+						<img src="{{url_for('static', filename='up_arrow.png')}}"
+							 width="100" height="100"/>
+					</button>
+				</a>
+				<a id=up_right class=drive_buttons>
+					<button>
+						<img src="{{url_for('static', filename='up_arrow.png')}}"
+							 width="100" height="100"/>
+					</button>
+				</a>
+			</div>
 
+			<div id="double_arrows">
+				<a id=left class=drive_buttons>
+					<button>
+						<img src="{{url_for('static', filename='up_arrow.png')}}"
+							 width="160" height="100"/>
+					</button>
+				</a>
+				<a id=right class=drive_buttons>
+					<button>
+						<img src="{{url_for('static', filename='up_arrow.png')}}"
+							 width="160" height="100"/>
+					</button>
+				</a>
+			</div>
+			<div id="single_arrows">
+				<a id=down class=drive_buttons>
+					<button>
+						<img src="{{url_for('static', filename='up_arrow.png')}}"
+							 width="340" height="100"/>
+					</button>
+				</a>
+			</div>
+		</div>
+	</form>
+	</div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type=text/javascript>
     $(function () {
