@@ -13,17 +13,21 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/drive", methods=['POST'])
-def drive():
+@app.route("/run", methods=['POST'])
+def run():
     command = request.form["data"]
     switch = {
-        "up_left": rover.forward_left,
-        "up": rover.forward,
-        "up_right": rover.forward_right,
-        "left": rover.spin_left,
-        "right": rover.spin_right,
-        "down": rover.backward,
-        "stop": rover.stop
+        "forward_left": rover.forward_left,
+        "forward": rover.forward,
+        "forward_right": rover.forward_right,
+        "spin_left": rover.spin_left,
+        "spin_right": rover.spin_right,
+        "backward": rover.backward,
+        "stop": rover.stop,
+        "tilt_up": rover.tilt_up,
+        "tilt_down": rover.tilt_down,
+        "pan_left": rover.pan_left,
+        "pan_right": rover.pan_right
     }
     switch[command]()
     return ""

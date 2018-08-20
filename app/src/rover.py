@@ -45,25 +45,21 @@ class Rover:
         return
 
     def pan_left(self):
-        # arduino.write(struct.pack('>BBBBB', 1, 1, speed, 0, 1))
-        pass
-
-    def no_pan(self):
-        # arduino.write(struct.pack('>BBBBB', 1, 1, speed, 1, 1))
-        pass
+        self.arduino.write(struct.pack('>BBBBB', 1, 1, self.speed, 0, 1))
+        print("pan_left")
+        return
 
     def pan_right(self):
-        # arduino.write(struct.pack('>BBBBB', 1, 1, speed, 2, 1))
-        pass
+        self.arduino.write(struct.pack('>BBBBB', 1, 1, self.speed, 2, 1))
+        print("pan_right")
+        return
 
     def tilt_up(self):
-        # arduino.write(struct.pack('>BBBBB', 1, 1, speed, 1, 2))
-        pass
-
-    def no_tilt(self):
-        # arduino.write(struct.pack('>BBBBB', 1, 1, speed, 1, 1))
-        pass
+        self.arduino.write(struct.pack('>BBBBB', 1, 1, self.speed, 1, 2))
+        print("tilt_up")
+        return
 
     def tilt_down(self):
-        # arduino.write(struct.pack('>BBBBB', 1, 1, speed, 1, 0))
-        pass
+        self.arduino.write(struct.pack('>BBBBB', 1, 1, self.speed, 1, 0))
+        print("tilt_down")
+        return

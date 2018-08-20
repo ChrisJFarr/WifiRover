@@ -15,47 +15,32 @@
 	<form>
 		<div id="drive_operations">
 			<div id="triple_arrows">
-				<a id=up_left class=drive_buttons>
-					<button>
-						<img src="{{url_for('static', filename='up_arrow.png')}}"
-							 width="100" height="100"/>
-					</button>
-				</a>
-				<a id=up class=drive_buttons>
-					<button>
-						<img src="{{url_for('static', filename='up_arrow.png')}}"
-							 width="100" height="100"/>
-					</button>
-				</a>
-				<a id=up_right class=drive_buttons>
-					<button>
-						<img src="{{url_for('static', filename='up_arrow.png')}}"
-							 width="100" height="100"/>
-					</button>
-				</a>
+				<img id=forward_left class=drive_buttons src="{{url_for('static', filename='up_arrow.png')}}"/>
+				<img id=forward class=drive_buttons src="{{url_for('static', filename='up_arrow.png')}}"/>
+				<img id=forward_right class=drive_buttons src="{{url_for('static', filename='up_arrow.png')}}"/>
 			</div>
 
 			<div id="double_arrows">
-				<a id=left class=drive_buttons>
-					<button>
-						<img src="{{url_for('static', filename='up_arrow.png')}}"
-							 width="160" height="100"/>
-					</button>
-				</a>
-				<a id=right class=drive_buttons>
-					<button>
-						<img src="{{url_for('static', filename='up_arrow.png')}}"
-							 width="160" height="100"/>
-					</button>
-				</a>
+				<img id=spin_left class=drive_buttons src="{{url_for('static', filename='up_arrow.png')}}"/>
+				<img id=spin_right class=drive_buttons src="{{url_for('static', filename='up_arrow.png')}}"/>
 			</div>
 			<div id="single_arrows">
-				<a id=down class=drive_buttons>
-					<button>
-						<img src="{{url_for('static', filename='up_arrow.png')}}"
-							 width="340" height="100"/>
-					</button>
-				</a>
+				<img id=backward class=drive_buttons src="{{url_for('static', filename='up_arrow.png')}}"/>
+			</div>
+		</div>
+		
+		<div id="camera_operations">
+			<div id="single_arrows">
+				<img id="tilt_up" src="{{url_for('static', filename='up_arrow.png')}}">
+			</div>
+
+			<div id="double_arrows">
+				<img id="pan_left" src="{{url_for('static', filename='up_arrow.png')}}">
+				<img id="pan_right" src="{{url_for('static', filename='up_arrow.png')}}">
+			</div>
+			
+			<div id="single_arrows">
+				<img id="tilt_down" src="{{url_for('static', filename='up_arrow.png')}}">
 			</div>
 		</div>
 	</form>
@@ -64,56 +49,88 @@
 <script type=text/javascript>
     $(function () {
         $(document.getElementsByClassName("drive_buttons")).bind('mouseup', function () {
-            $.post("/drive", {
+            $.post("/run", {
                 data: "stop"
             });
             return false;
         });
     });
     $(function () {
-        $('a#up').bind('mousedown', function () {
-            $.post("/drive", {
-                data: "up"
+        $('#forward_left').bind('mousedown', function () {
+            $.post("/run", {
+                data: "forward_left"
+            });
+            return false;
+        });
+    });
+	$(function () {
+        $('#forward').bind('mousedown', function () {
+            $.post("/run", {
+                data: "forward"
             });
             return false;
         });
     });
     $(function () {
-        $('a#up_left').bind('mousedown', function () {
-            $.post("/drive", {
-                data: "up_left"
+        $('#forward_right').bind('mousedown', function () {
+            $.post("/run", {
+                data: "forward_right"
             });
             return false;
         });
     });
     $(function () {
-        $('a#up_right').bind('mousedown', function () {
-            $.post("/drive", {
-                data: "up_right"
+        $('#spin_left').bind('mousedown', function () {
+            $.post("/run", {
+                data: "spin_left"
             });
             return false;
         });
     });
     $(function () {
-        $('a#left').bind('mousedown', function () {
-            $.post("/drive", {
-                data: "left"
+        $('#spin_right').bind('mousedown', function () {
+            $.post("/run", {
+                data: "spin_right"
             });
             return false;
         });
     });
     $(function () {
-        $('a#right').bind('mousedown', function () {
-            $.post("/drive", {
-                data: "right"
+        $('#backward').bind('mousedown', function () {
+            $.post("/run", {
+                data: "backward"
             });
             return false;
         });
     });
-    $(function () {
-        $('a#down').bind('mousedown', function () {
-            $.post("/drive", {
-                data: "down"
+	$(function () {
+        $('#tilt_up').bind('mousedown', function () {
+            $.post("/run", {
+                data: "tilt_up"
+            });
+            return false;
+        });
+    });
+	$(function () {
+        $('#tilt_down').bind('mousedown', function () {
+            $.post("/run", {
+                data: "tilt_down"
+            });
+            return false;
+        });
+    });
+	$(function () {
+        $('#pan_left').bind('mousedown', function () {
+            $.post("/run", {
+                data: "pan_left"
+            });
+            return false;
+        });
+    });
+	$(function () {
+        $('#pan_right').bind('mousedown', function () {
+            $.post("/run", {
+                data: "pan_right"
             });
             return false;
         });

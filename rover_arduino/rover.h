@@ -17,8 +17,8 @@ class Rover {
     // servo constants
     const int X_SERVO_PIN = 9;
     const int Y_SERVO_PIN = 10;
-    const int SERVO_DELAY = 5; //delay to allow the servo to reach position;
-    const int SERVO_SPEED = 3; // Steps per servo adjustment call
+    const int SERVO_DELAY = 35; //delay to allow the servo to reach position;
+    const int SERVO_SPEED = 5; // Steps per servo adjustment call
     const int X_START_POS = 80;
     const int Y_START_POS = 130;
     const int X_MAX = 170;
