@@ -1,31 +1,40 @@
+import os
+import io
+print(os.getcwd())
 from flask import Flask, render_template, request, Response
+import time
 try:
     from src.rover import Rover
     from src.camera_pi import Camera
     import picamera
-except ImportError:
+except ImportError as e:
+    print(e)
     pass
 
 app = Flask(__name__)
 rover = Rover()
-
+camera = picamera.PiCamera()
+time.sleep(2)
+# Flip picture
+camera.hflip = True
+camera.vflip = True
+stream = io.BytesIO()
 
 @app.route("/")
 def index():
     return render_template("index.html")
 
 
-def gen(camera):
-    while True:
-        frame = camera.get_frame()
-        yield(b'--frame\r\n'
-              b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
-
-@app.route('/video_feed')
+@app.route('/video_feed', methods=['GET','POST'])
 def video_feed():
-    return Response(gen(Camera()),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
+    print("getting image")
+    camera.capture(stream, 'jpeg')
+    stream.seek(0)
+    image = stream.read()
+    stream.seek(0)
+    stream.truncate()
+    return Response(image, mimetype='image/gif')
 
 
 @app.route("/run", methods=['POST'])

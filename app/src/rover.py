@@ -6,7 +6,8 @@ class Rover:
 
     def __init__(self):
         # Connect to arduino
-        self.arduino = serial.Serial('com3', 9600, timeout=1)
+        #self.arduino = serial.Serial('com3', 9600, timeout=1)
+        self.arduino = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
         self.speed = 80
 
     def forward(self):
