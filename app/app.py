@@ -1,6 +1,8 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Response
 try:
     from src.rover import Rover
+    from src.camera_pi import Camera
+    import picamera
 except ImportError:
     pass
 
@@ -11,6 +13,19 @@ rover = Rover()
 @app.route("/")
 def index():
     return render_template("index.html")
+
+
+def gen(camera):
+    while True:
+        frame = camera.get_frame()
+        yield(b'--frame\r\n'
+              b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+
+@app.route('/video_feed')
+def video_feed():
+    return Response(gen(Camera()),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 @app.route("/run", methods=['POST'])
