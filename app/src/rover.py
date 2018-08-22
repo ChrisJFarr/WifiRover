@@ -1,4 +1,5 @@
 import serial
+from serial.serialutil import SerialException
 import struct
 
 
@@ -7,8 +8,16 @@ class Rover:
     def __init__(self):
         # Connect to arduino
         #self.arduino = serial.Serial('com3', 9600, timeout=1)
-        self.arduino = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
+        self.arduino = self.connect()
         self.speed = 80
+
+    def connect(self):
+        try:
+            arduino = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
+        except Exception:
+            raise Exception("Plug in that Arduino!")
+        return arduino
+
 
     def forward(self):
         self.arduino.write(struct.pack('>BBBBB', 2, 2, self.speed, 1, 1))
