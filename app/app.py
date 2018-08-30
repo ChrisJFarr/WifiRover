@@ -1,11 +1,9 @@
-import os
 import io
-print(os.getcwd())
 from flask import Flask, render_template, request, Response
 import time
+
 try:
     from src.rover import Rover
-    from src.camera_pi import Camera
     import picamera
 except ImportError as e:
     print(e)
@@ -13,28 +11,27 @@ except ImportError as e:
 
 app = Flask(__name__)
 rover = Rover()
-camera = picamera.PiCamera()
-time.sleep(2)
+# camera = picamera.PiCamera()
+# time.sleep(2)
 # Flip picture
-camera.hflip = True
-camera.vflip = True
-stream = io.BytesIO()
+# camera.hflip = True
+# camera.vflip = True
+# stream = io.BytesIO()
+
 
 @app.route("/")
 def index():
     return render_template("index.html")
 
 
-
-@app.route('/video_feed', methods=['GET','POST'])
-def video_feed():
-    print("getting image")
-    camera.capture(stream, 'jpeg')
-    stream.seek(0)
-    image = stream.read()
-    stream.seek(0)
-    stream.truncate()
-    return Response(image, mimetype='image/gif')
+# @app.route('/video_feed', methods=['GET', 'POST'])
+# def video_feed():
+#     # camera.capture(stream, 'jpeg')
+#     stream.seek(0)
+#     image = stream.read()
+#     yield Response(image, mimetype='image/gif')
+#     stream.seek(0)
+#     stream.truncate()
 
 
 @app.route("/run", methods=['POST'])
@@ -55,6 +52,7 @@ def run():
     }
     switch[command]()
     return ""
+
 
 # Route for main page
 # Route for video feed (start with static image as a placeholder)

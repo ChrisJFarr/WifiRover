@@ -4,48 +4,8 @@
     <meta charset="UTF-8">
     <title>Rover</title>
 	<link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}"/>
-</head>
-<body>
 
-	<div class="background">
-		<img src={{ url_for('video_feed') }} class="videoStream" id="myVideo"/>
-	</div>
-
-	<div id="operations" class="content">
-	<form>
-		<div id="drive_operations">
-			<div id="triple_arrows">
-				<img id=forward_left class=drive_buttons src="{{url_for('static', filename='up_arrow.png')}}"/>
-				<img id=forward class=drive_buttons src="{{url_for('static', filename='up_arrow.png')}}"/>
-				<img id=forward_right class=drive_buttons src="{{url_for('static', filename='up_arrow.png')}}"/>
-			</div>
-
-			<div id="double_arrows">
-				<img id=spin_left class=drive_buttons src="{{url_for('static', filename='up_arrow.png')}}"/>
-				<img id=spin_right class=drive_buttons src="{{url_for('static', filename='up_arrow.png')}}"/>
-			</div>
-			<div id="single_arrows">
-				<img id=backward class=drive_buttons src="{{url_for('static', filename='up_arrow.png')}}"/>
-			</div>
-		</div>
-		
-		<div id="camera_operations">
-			<div id="single_arrows">
-				<img id="tilt_up" src="{{url_for('static', filename='up_arrow.png')}}">
-			</div>
-
-			<div id="double_arrows">
-				<img id="pan_left" src="{{url_for('static', filename='up_arrow.png')}}">
-				<img id="pan_right" src="{{url_for('static', filename='up_arrow.png')}}">
-			</div>
-			
-			<div id="single_arrows">
-				<img id="tilt_down" src="{{url_for('static', filename='up_arrow.png')}}">
-			</div>
-		</div>
-	</form>
-	</div>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type=text/javascript>
 
     $(function () {
@@ -137,5 +97,45 @@
         });
     });
 </script>
+
+
+</head>
+<body>
+
+	<div id="operations" class="content">
+	<form>
+		<div id="drive_operations">
+			<div class="triple_arrows">
+				<img id=forward_left class=drive_buttons src="{{url_for('static', filename='up_arrow.png')}}"/>
+				<img id=forward class=drive_buttons src="{{url_for('static', filename='up_arrow.png')}}"/>
+				<img id=forward_right class=drive_buttons src="{{url_for('static', filename='up_arrow.png')}}"/>
+			</div>
+
+			<div class="double_arrows">
+				<img id=spin_left class=drive_buttons src="{{url_for('static', filename='up_arrow.png')}}"/>
+				<img id=spin_right class=drive_buttons src="{{url_for('static', filename='up_arrow.png')}}"/>
+			</div>
+			<div class="single_arrows">
+				<img id=backward class=drive_buttons src="{{url_for('static', filename='up_arrow.png')}}"/>
+			</div>
+		</div>
+		
+		<div id="camera_operations">
+			<div class="single_arrows">
+				<img id="tilt_up" src="{{url_for('static', filename='up_arrow.png')}}">
+			</div>
+
+			<div class="double_arrows">
+				<img id="pan_left" src="{{url_for('static', filename='up_arrow.png')}}">
+				<img id="pan_right" src="{{url_for('static', filename='up_arrow.png')}}">
+			</div>
+			
+			<div class="single_arrows">
+				<img id="tilt_down" src="{{url_for('static', filename='up_arrow.png')}}">
+			</div>
+		</div>
+	</form>
+	</div>
+
 </body>
 </html>

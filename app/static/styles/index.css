@@ -48,50 +48,32 @@ img {
 
 #forward_left {
 	transform: rotate(-45deg);
-	padding-right: 0px;
-	padding-left: 0px;
-	padding-top: 0px;
-    padding-bottom: 0px;
+	padding: 0;
 }
 
 #forward {
 	transform: rotate(0deg);
-	padding-right: 0px;
-	padding-left: 0px;
-	padding-top: 0px;
-    padding-bottom: 0px;
+	padding: 0;
 }
 
 #forward_right {
 	transform: rotate(45deg);
-	padding-right: 0px;
-	padding-left: 0px;
-	padding-top: 0px;
-    padding-bottom: 0px;
+	padding: 0;
 }
 
 #spin_left {
 	transform: rotate(-90deg);
-	padding-right: 30px;
-	padding-left: 0px;
-	padding-top: 0px;
-    padding-bottom: 0px;
+	padding: 0 30px 0 0;
 }
 
 #spin_right {
 	transform: rotate(90deg);
-	padding-right: 0px;
-	padding-left: 30px;
-	padding-top: 0px;
-    padding-bottom: 0px;
+	padding: 0 0 0 30px;
 }
 
 #backward {
 	transform: rotate(180deg);
-	padding-right: 57px;
-	padding-left: 25;
-	padding-top: 0px;
-    padding-bottom: 30px;
+	padding: 0 57px 30px 25px;
 }
 
 
@@ -103,34 +85,22 @@ img {
 
 #tilt_up {
 	transform: rotate(0deg);
-	padding-right: 25px;
-	padding-left: 57px;
-	padding-top: 0px;
-    padding-bottom: 0px;
+	padding: 0 25px 0 57px;
 }
 
 #tilt_down {
 	transform: rotate(180deg);
-	padding-right: 57px;
-	padding-left: 25;
-	padding-top: 0px;
-    padding-bottom: 30px;
+	padding: 0 57px 30px 25px;
 }
 
 #pan_left {
 	transform: rotate(-90deg);
-	padding-right: 30px;
-	padding-left: 0px;
-	padding-top: 0px;
-    padding-bottom: 0px;
+	padding: 0 30px 0 0;
 }
 
 #pan_right {
 	transform: rotate(90deg);
-	padding-right: 0px;
-	padding-left: 30px;
-	padding-top: 0px;
-    padding-bottom: 0px;
+	padding: 0 0 0 30px;
 }
 
 
