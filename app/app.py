@@ -1,21 +1,24 @@
 import io
-from flask import Flask, render_template, request, Response
+from flask import Flask, render_template, request, Response, send_file
 import time
+import numpy as np
+import picamera
 
 try:
-    from src.rover import Rover
-    import picamera
+    from src.rover import Rover    
 except ImportError as e:
     print(e)
     pass
 
 app = Flask(__name__)
 rover = Rover()
-# camera = picamera.PiCamera()
-# time.sleep(2)
+cam_resolution = (700, 700)
+camera = picamera.PiCamera(resolution=cam_resolution)
+time.sleep(2)
 # Flip picture
-# camera.hflip = True
-# camera.vflip = True
+camera.hflip = True
+#camera.vflip = True
+camera.rotation = 90
 # stream = io.BytesIO()
 
 
@@ -23,15 +26,55 @@ rover = Rover()
 def index():
     return render_template("index.html")
 
+"""
+Resources for picamera/numpy/flask
+Get numpy from picamera: https://www.programcreek.com/python/example/88717/picamera.array
+Send numpy through flask p1: https://stackoverflow.com/questions/11017466/flask-to-return-image-stored-in-database/25150805#25150805
+Send numpy through flask p2: https://stackoverflow.com/questions/54899367/send-numpy-array-as-bytes-from-python-to-js-through-flask
+General fyi: https://picamera.readthedocs.io/en/release-1.13/api_array.html
+"""
+
 
 # @app.route('/video_feed', methods=['GET', 'POST'])
 # def video_feed():
-#     # camera.capture(stream, 'jpeg')
+#     start = time.time()
+#     camera.capture(stream, 'jpeg')
 #     stream.seek(0)
 #     image = stream.read()
-#     yield Response(image, mimetype='image/gif')
 #     stream.seek(0)
 #     stream.truncate()
+#     response = Response(image, mimetype='image/gif')
+#     print("%.2f" % (time.time() - start))
+#     return response
+
+@app.route('/video_feed', methods=['GET', 'POST'])
+def video_feed():
+    start = time.time()
+#     data = np.empty((cam_resolution[1],cam_resolution[0],3),dtype=np.uint8)
+#     # different edge detection methods
+#     camera.capture(data,'rgb') # capture image
+#     response = Response(data)  # , mimetype='image/gif')
+    with picamera.array.PiRGBArray(camera) as stream:
+#         if isDay:
+#             camera.exposure_mode = 'auto'
+#             camera.awb_mode = 'auto'
+#             time.sleep(motionCamSleep)   # sleep so camera can get AWB
+#         else:
+#             # use variable framerate_range for Low Light motion image stream
+#             camera.framerate_range = (Fraction(1, 6), Fraction(30, 1))
+#             time.sleep(2) # Give camera time to measure AWB
+#             camera.iso = nightMaxISO
+        camera.capture(stream, format='rgb')
+        camera.close()
+        output_arr = stream.array.tobytes()
+        
+    print("%.2f" % (time.time() - start))
+    
+    return 
+# TODO Start here
+return send_file(io.BytesIO(obj.logo.read()),
+                     attachment_filename='logo.png',
+                     mimetype='image/png')
 
 
 @app.route("/run", methods=['POST'])
