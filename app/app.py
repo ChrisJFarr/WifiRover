@@ -70,11 +70,12 @@ def video_feed():
         
     print("%.2f" % (time.time() - start))
     
-    return 
-# TODO Start here
-return send_file(io.BytesIO(obj.logo.read()),
-                     attachment_filename='logo.png',
+    return send_file(io.BytesIO(output_arr),
+                     attachment_filename='capture.png',
                      mimetype='image/png')
+# TODO Try running as-is
+# TODO Then, Go to canvas and checkout the challenge code for tips on picamera framerate
+
 
 
 @app.route("/run", methods=['POST'])
