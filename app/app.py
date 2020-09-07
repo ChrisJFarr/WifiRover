@@ -1,5 +1,5 @@
 import io
-from flask import Flask, render_template, request, Response
+from flask import Flask, render_template, request, make_response, send_file
 import time
 
 try:
@@ -11,12 +11,17 @@ except ImportError as e:
 
 app = Flask(__name__)
 rover = Rover()
-# camera = picamera.PiCamera()
-# time.sleep(2)
-# Flip picture
-# camera.hflip = True
-# camera.vflip = True
-# stream = io.BytesIO()
+try:
+    # Picamera setup
+    cam_resolution = (700, 700)
+    camera = picamera.PiCamera(resolution=cam_resolution)
+    time.sleep(2)
+    # Flip picture
+    camera.hflip = True
+    # camera.vflip = True
+    camera.rotation = 90
+except ModuleNotFoundError as e:
+    print(e)
 
 
 @app.route("/")
@@ -24,14 +29,17 @@ def index():
     return render_template("index.html")
 
 
-# @app.route('/video_feed', methods=['GET', 'POST'])
-# def video_feed():
-#     # camera.capture(stream, 'jpeg')
-#     stream.seek(0)
-#     image = stream.read()
-#     yield Response(image, mimetype='image/gif')
-#     stream.seek(0)
-#     stream.truncate()
+@app.route('/capture', methods=['GET', 'POST'])
+def capture():
+    start = time.time()
+    with picamera.array.PiRGBArray(camera) as stream:
+        camera.capture(stream, format='rgb')
+        camera.close()
+        output_arr = stream.array.tobytes()
+    print("%.2f" % (time.time() - start))
+    return send_file(io.BytesIO(output_arr),
+                     attachment_filename='capture.png',
+                     mimetype='image/png')
 
 
 @app.route("/run", methods=['POST'])
@@ -51,8 +59,15 @@ def run():
         "pan_right": rover.pan_right
     }
     switch[command]()
-    return ""
+    return make_response("")
 
+# TODO Add sensor reading
+@app.route("/read", methods=['GET'])
+def sensor():
+    sensor_response = rover.read_distance()
+    return make_response(sensor_response)
+
+# TODO Add new camera code or uncomment
 
 # Route for main page
 # Route for video feed (start with static image as a placeholder)
@@ -60,4 +75,4 @@ def run():
 
 
 if __name__ == "__main__":
-    app.run("0.0.0.0")
+    app.run(host="0.0.0.0", port=80)
