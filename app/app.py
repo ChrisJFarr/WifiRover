@@ -18,7 +18,7 @@ try:
     camera = picamera.PiCamera(resolution=cam_resolution)
     time.sleep(2)
     # Flip picture
-    camera.hflip = True
+    # camera.hflip = True
     # camera.vflip = True
     camera.rotation = 90
 except ModuleNotFoundError as e:
@@ -56,7 +56,9 @@ def run():
         "tilt_up": rover.tilt_up,
         "tilt_down": rover.tilt_down,
         "pan_left": rover.pan_left,
-        "pan_right": rover.pan_right
+        "pan_right": rover.pan_right,
+        "increase_speed": rover.speed += 25,
+        "decrease_speed": rover.speed -= 25,
     }
     switch[command]()
     return make_response("")
