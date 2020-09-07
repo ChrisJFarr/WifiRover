@@ -57,8 +57,8 @@ def run():
         "tilt_down": rover.tilt_down,
         "pan_left": rover.pan_left,
         "pan_right": rover.pan_right,
-        "increase_speed": rover.speed += 25,
-        "decrease_speed": rover.speed -= 25,
+        "increase_speed": rover.increase_speed,
+        "decrease_speed": rover.decrease_speed,
     }
     switch[command]()
     return make_response("")

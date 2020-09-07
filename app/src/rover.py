@@ -30,7 +30,14 @@ class Rover:
     def write(self):
         self.arduino.write(struct.pack(self.bit_str, self.left, self.right,
                                        self.speed, self.pan, self.tilt, self.sense))
-
+        
+    def increase_speed(self):
+        self.speed += 25
+        
+    def decrease_speed(self):
+        self.speed -= 25
+        self.speed = max(self.speed, 0)
+        
     def forward(self):
         # self.arduino.write(struct.pack(self.bit_str, 2, 2, self.speed, 1, 1))
         self.left = 2
