@@ -3,6 +3,16 @@ import struct
 from time import time
 
 
+class RoverCam:
+
+    pass
+
+
+
+
+
+
+
 class Rover:
 
     def __init__(self):
@@ -119,17 +129,22 @@ class Rover:
         print("tilt_down")
         return
 
-    def read_distance(self):
-        print("start")
-        start = time()
+    def read_distance(self, verbose=False):
+        if verbose:
+            start = time()
+        else:
+            start = 0
         self.sense = 1
         self.write()
         self.sense = 0
-        print("read_distance")
         b_msg = self.arduino.readline()
         str_msg = b_msg.decode()
-        print("stop")
-        print("%.2f" % (time() - start))
-        print("msg type", str(type(str_msg)))
-        print("msg val", str(str_msg))
-        return str_msg
+        str_msg = str_msg.rstrip()
+        mm = int(str_msg)
+        # Convert to inches
+        inches = mm / 25.4
+        if verbose:
+            print("%.2f" % (time() - start))
+        else:
+            pass
+        return inches
