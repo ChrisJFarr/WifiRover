@@ -14,7 +14,7 @@ app = Flask(__name__)
 rover = Rover()
 try:
     # Picamera setup
-    cam_resolution = (700, 700)
+    cam_resolution = (200, 200)
     camera = picamera.PiCamera(resolution=cam_resolution)
     time.sleep(2)
     # Flip picture
