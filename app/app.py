@@ -4,10 +4,11 @@ import time
 
 try:
     from src.rover import Rover
+    import picamera.array
     import picamera
 except ImportError as e:
     print(e)
-    pass
+    raise e
 
 app = Flask(__name__)
 rover = Rover()
