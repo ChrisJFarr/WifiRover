@@ -1,6 +1,7 @@
 import io
 from flask import Flask, render_template, request, make_response, send_file
 import time
+import pickle
 
 try:
     from src.rover import Rover
@@ -36,11 +37,10 @@ def capture():
     with picamera.array.PiRGBArray(camera) as stream:
         camera.capture(stream, format='rgb')
         camera.close()
-        output_arr = stream.array.tobytes()
+        # output_arr = stream.array.tobytes()
+        output_arr = pickle.dumps(stream.array)
     print("%.2f" % (time.time() - start))
-    return send_file(io.BytesIO(output_arr),
-                     attachment_filename='capture.png',
-                     mimetype='image/png')
+    return send_file(io.BytesIO(output_arr))
 
 
 @app.route("/run", methods=['POST'])
