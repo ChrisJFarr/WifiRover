@@ -12,9 +12,18 @@ https://www.pyimagesearch.com/2018/09/19/pip-install-opencv/
 # Look down until sensor starts to change
 
 # Think about computer vision, what are some easy ones? Equipment challenge time?
+import os
+TEMP_WORKING_DIR = "/tmp/pycharm_project_465"
+os.getcwd()
+os.chdir(TEMP_WORKING_DIR)
+os.system("ls")
+import sys
+sys.path = [TEMP_WORKING_DIR] + sys.path
 import numpy as np
 from app.src.rover import Rover
+from time import time
 from time import sleep
+
 # rover = Rover()
 #
 # rover.forward()
@@ -44,7 +53,6 @@ Obstacle avoid algorithm
     c. Continue until sensor returns >= 36 inches
 """
 
-
 # Initialize rover
 rover = Rover()
 
@@ -62,6 +70,7 @@ def rotate_25_degrees():
     sleep(.75)
     rover.stop()
 
+
 """
 Simple obstacle avoidance
 """
@@ -77,7 +86,6 @@ while True:
         rover.speed = STARTING_SPEED
         rover.forward()
     sleep(.5)
-
 
 # Good start above
 # By only being able to turn 25 degrees to the right, the robot can
@@ -99,17 +107,24 @@ More dynamic obstacle avoidance
 # Pan right, measure
 # Determine of A-C and C-B angle
 from math import acos, degrees
+
 # https://stackoverflow.com/questions/18583214/calculate-angle-of-triangle-python
+# https://www.mathsisfun.com/algebra/trig-solving-sss-triangles.html#:~:text=%22SSS%22%20is%20when%20we%20know,again%20to%20find%20another%20angle
 # Tilt slightly to ensure accurate distance reading
 # TODO Start here
 # Function for determining angle of obstacle
 side_c_midpoint = np.min([rover.read_distance() for _ in range(3)])
 # Pan left
+
 for _ in range(10):
     rover.pan_left()
     sleep(.15)
 # Capture distance again
+
+
+start = time()
 side_a = np.min([rover.read_distance() for _ in range(3)])
+print("%.2f" % (time() - start))
 # Pan right
 for _ in range(20):
     rover.pan_right()
@@ -120,6 +135,80 @@ side_b = np.min([rover.read_distance() for _ in range(3)])
 for _ in range(10):
     rover.pan_left()
     sleep(.15)
+
+"""
+# Steps to compute angle of wall
+"""
+# Measure distance from sensor to point on wall directly in front (using heading) (side D)
+# Tilt slightly up and down to get a good read and avoid obstructions
+
+# Measure distance using to obstacle ahead
+# Tilt up
+# Measure
+# Recenter vertical
+# Tilt down
+# Measure
+# Re-center vertical
+
+# If computing angle from heading to the left
+# Pan left
+# Tilt up
+# Measure
+# Recenter vertical
+# Tilt down
+# Measure
+# Re-center vertical and horizontal
+
+# If computing angle from heading to the right
+# Pan right
+# Tilt up
+# Measure
+# Recenter vertical
+# Tilt down
+# Measure
+# Re-center vertical and horizontal
+
+
+# Pan to the left (or right) and again capture distance (side E)
+# Perhaps while panning, ensure wall does not end using sensor
+# If it ends then use the last known value prior to dropping off
+# Calculate length of wall using pathagorem theorem (side F)
+# Compute angle of the angle to the relative right of the robot (between sides D and F)
+
+
+# TO use this output, this can work as a sensor reading for localization,
+#  but can also be used for simple
+# navigation to move about the room
+# Using minimum distance from a sample seems to make sense when avoiding obstacles
+
+
+"""
+Function to calibrate motor speed to robot velocity
+"""
+# Compute the robot velocity and keep mapping to corresponding motor speed (ranges 0-255)
+# Could standardize the motor speed options and calibrate each one
+# May need to recalibrate depending on battery level and type of surface
+# Perhaps this could also be a mechanism for measuring battery level
+# Or battery needs to be determined and monitored for better localization
+
+# Algorithm
+# Align with a wall, adjust so heading is directly towards wall (90 degrees)
+# Measure distance to wall (back up to allow 36 inches at least)
+# Measure distance (A), ensure >= 36 inches
+# Using desired calibration speed, drive towards wall for .5 seconds and stop
+# Measure angle, and ensure still at 90 degrees (if not, start over? perhaps just once)
+# Measure distance (B)
+# Calculate velocity as inches traveled per second (A-B) / .5
+
+
+"""
+How does motor speed translate to rotation speed?
+"""
+
+# Measure the distance from wheel to wheel and inform robot
+# Will that even help? Maybe it'll help with an estimate
+# Perhaps with a quicker rotation I can compute the angle against the
+#  same wall and get a more reliable reading.
 
 
 
@@ -147,3 +236,16 @@ image = plt.imshow(output_arr)
 plt.show()
 
 output_arr.shape
+
+
+"""
+
+"""
+
+
+
+
+
+
+
+
